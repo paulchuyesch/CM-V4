@@ -1,73 +1,78 @@
-# Welcome to your Lovable project
+# Calculadora de Multas y Sanciones SST
 
-## Project info
+Este proyecto es una herramienta para calcular multas y sanciones en el ámbito de Seguridad y Salud en el Trabajo (SST), desarrollado por **Paul Chuyes**.
 
-**URL**: https://lovable.dev/projects/7cb0a401-2a71-4003-87f5-ae6f9d6b7c9b
+## Tecnologías Utilizadas
 
-## How can I edit this code?
+*   **Frontend:**
+    *   Vite
+    *   React
+    *   TypeScript
+    *   shadcn-ui
+    *   Tailwind CSS
+*   **Backend:**
+    *   Python
+    *   FastAPI
+    *   Supabase
 
-There are several ways of editing your application.
+## Cómo iniciar el proyecto localmente
 
-**Use Lovable**
+Sigue estos pasos para configurar y ejecutar el proyecto en tu máquina local.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/7cb0a401-2a71-4003-87f5-ae6f9d6b7c9b) and start prompting.
+### Prerrequisitos
 
-Changes made via Lovable will be committed automatically to this repo.
+*   Node.js y npm (o bun)
+*   Python 3 y pip
 
-**Use your preferred IDE**
+### Frontend
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+1.  **Navega a la raíz del proyecto:**
+    '''sh
+    cd sst-insight-wizard-main
+    '''
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+2.  **Instala las dependencias:**
+    '''sh
+    npm install
+    # O si usas bun
+    # bun install
+    '''
 
-Follow these steps:
+3.  **Inicia el servidor de desarrollo:**
+    '''sh
+    npm run dev
+    # O si usas bun
+    # bun run dev
+    '''
+    El frontend estará disponible en `http://localhost:5173`.
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### Backend
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+1.  **Navega al directorio del backend:**
+    '''sh
+    cd sst-insight-wizard-main/mi_backend_python
+    '''
 
-# Step 3: Install the necessary dependencies.
-npm i
+2.  **Crea y activa un entorno virtual (recomendado):**
+    '''sh
+    python -m venv venv
+    source venv/bin/activate  # En Windows usa `venv\Scripts\activate`
+    '''
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+3.  **Instala las dependencias de Python:**
+    '''sh
+    pip install fastapi "pydantic[email]" python-dotenv supabase pandas uvicorn
+    '''
 
-**Edit a file directly in GitHub**
+4.  **Configura las variables de entorno:**
+    Crea un archivo `.env` dentro de la carpeta `mi_backend_python` y añade las credenciales de tu proyecto de Supabase:
+    '''
+    SUPABASE_URL="TU_URL_DE_SUPABASE"
+    SUPABASE_SERVICE_KEY="TU_SERVICE_KEY_DE_SUPABASE"
+    '''
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/7cb0a401-2a71-4003-87f5-ae6f9d6b7c9b) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+5.  **Inicia el servidor de FastAPI:**
+    '''sh
+    uvicorn main:app --reload
+    '''
+    El backend estará disponible en `http://localhost:8000`.
