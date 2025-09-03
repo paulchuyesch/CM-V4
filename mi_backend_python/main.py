@@ -89,7 +89,7 @@ def calcular_multa_sunafil(datos_formulario):
             else: rango = '901-a-mas'
             monto_multa = TABLA_MULTAS_GENERAL.loc[rango, severidad_maxima]
     return {
-        "lead": {"nombre": datos_formulario.get("nombre"), "empresa": datos_formulario.get("empresa"), "numero_trabajadores": numero_trabajadores, "tipo_empresa": tipo_empresa.replace('_', ' ').title()},
+        "lead": {"nombre": datos_formulario.get("nombre"), "empresa": datos_formulario.get("empresa"), "cargo": datos_formulario.get("cargo"), "numero_trabajadores": numero_trabajadores, "tipo_empresa": tipo_empresa.replace('_', ' ').title()},
         "diagnostico": {"severidad_maxima": severidad_maxima, "total_incumplimientos": sum(hallazgos.values()), "resumen_hallazgos": hallazgos, "detalle_hallazgos": lista_hallazgos_detallada},
         "multa": {"monto_final_soles": float(monto_multa)}
     }
@@ -112,6 +112,7 @@ class DatosFormulario(BaseModel):
     email: str
     telefono: str
     empresa: str
+    cargo: str
     numero_trabajadores: int
     tipo_empresa: str
     respuestas: Dict[str, str]
@@ -143,6 +144,7 @@ async def ejecutar_diagnostico(request: Request):
         data_to_insert = {
             'nombre_lead': resultado['lead']['nombre'],
             'empresa': resultado['lead']['empresa'],
+            'cargo_lead': resultado['lead']['cargo'],
             'numero_trabajadores': resultado['lead']['numero_trabajadores'],
             'tipo_empresa': resultado['lead']['tipo_empresa'],
             'severidad_maxima': resultado['diagnostico']['severidad_maxima'],

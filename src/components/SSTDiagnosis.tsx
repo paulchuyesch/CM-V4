@@ -18,6 +18,7 @@ export interface CompanyData {
   email: string;
   telefono: string;
   empresa: string;
+  cargo: string;
   numeroTrabajadores: number;
   tipoEmpresa: 'micro' | 'pequena' | 'no_mype' | '';
 }
@@ -33,6 +34,7 @@ export const SSTDiagnosis: React.FC = () => {
     email: '',
     telefono: '',
     empresa: '',
+    cargo: '',
     numeroTrabajadores: 0,
     tipoEmpresa: '',
   });
@@ -56,6 +58,7 @@ export const SSTDiagnosis: React.FC = () => {
       email: companyData.email,
       telefono: companyData.telefono,
       empresa: companyData.empresa,
+      cargo: companyData.cargo,
       numero_trabajadores: companyData.numeroTrabajadores,
       tipo_empresa: companyData.tipoEmpresa,
       respuestas: data
@@ -93,6 +96,7 @@ export const SSTDiagnosis: React.FC = () => {
       email: '',
       telefono: '',
       empresa: '',
+      cargo: '',
       numeroTrabajadores: 0,
       tipoEmpresa: '',
     });

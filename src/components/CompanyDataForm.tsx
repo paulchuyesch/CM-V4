@@ -17,6 +17,7 @@ export const CompanyDataForm: React.FC<CompanyDataFormProps> = ({ onSubmit }) =>
     email: '',
     telefono: '',
     empresa: '',
+    cargo: '',
     numeroTrabajadores: 0,
     tipoEmpresa: '',
   });
@@ -51,6 +52,10 @@ export const CompanyDataForm: React.FC<CompanyDataFormProps> = ({ onSubmit }) =>
 
     if (!formData.empresa.trim()) {
       newErrors.empresa = 'El nombre de la empresa es requerido';
+    }
+
+    if (!formData.cargo.trim()) {
+      newErrors.cargo = 'El cargo es requerido';
     }
 
     if (formData.numeroTrabajadores <= 0) {
@@ -107,9 +112,9 @@ export const CompanyDataForm: React.FC<CompanyDataFormProps> = ({ onSubmit }) =>
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Nombre */}
-            <div>
+          <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6">
+            {/* Fila 1: Nombre Completo (Ocupa 2 columnas) */}
+            <div className="md:col-span-2">
               <label htmlFor="nombre" className="block text-sm font-medium text-foreground mb-2">
                 Tu nombre completo *
               </label>
@@ -126,7 +131,7 @@ export const CompanyDataForm: React.FC<CompanyDataFormProps> = ({ onSubmit }) =>
               )}
             </div>
 
-            {/* Email */}
+            {/* Fila 2: Correo y Teléfono */}
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
                 Correo corporativo *
@@ -144,7 +149,6 @@ export const CompanyDataForm: React.FC<CompanyDataFormProps> = ({ onSubmit }) =>
               )}
             </div>
 
-            {/* Teléfono */}
             <div>
               <label htmlFor="telefono" className="block text-sm font-medium text-foreground mb-2">
                 Número de contacto *
@@ -162,7 +166,7 @@ export const CompanyDataForm: React.FC<CompanyDataFormProps> = ({ onSubmit }) =>
               )}
             </div>
 
-            {/* Empresa */}
+            {/* Fila 3: Empresa y Cargo */}
             <div>
               <label htmlFor="empresa" className="block text-sm font-medium text-foreground mb-2">
                 Nombre de la empresa *
@@ -180,26 +184,24 @@ export const CompanyDataForm: React.FC<CompanyDataFormProps> = ({ onSubmit }) =>
               )}
             </div>
 
-            {/* Número de trabajadores */}
             <div>
-              <label htmlFor="trabajadores" className="block text-sm font-medium text-foreground mb-2">
-                Número de trabajadores *
+              <label htmlFor="cargo" className="block text-sm font-medium text-foreground mb-2">
+                Cargo *
               </label>
               <input
-                type="number"
-                id="trabajadores"
-                min="1"
-                value={formData.numeroTrabajadores || ''}
-                onChange={(e) => handleInputChange('numeroTrabajadores', parseInt(e.target.value) || 0)}
+                type="text"
+                id="cargo"
+                value={formData.cargo}
+                onChange={(e) => handleInputChange('cargo', e.target.value)}
                 className="w-full px-4 py-3 border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-ring bg-background"
-                placeholder="Ej: 25"
+                placeholder="Ej: Gerente de Operaciones"
               />
-              {errors.numeroTrabajadores && (
-                <p className="text-destructive text-sm mt-1">{errors.numeroTrabajadores}</p>
+              {errors.cargo && (
+                <p className="text-destructive text-sm mt-1">{errors.cargo}</p>
               )}
             </div>
 
-            {/* Tipo de empresa */}
+            {/* Fila 4: Tipo de Empresa y Número de Trabajadores */}
             <div>
               <label htmlFor="tipoEmpresa" className="block text-sm font-medium text-foreground mb-2">
                 Tipo de empresa *
@@ -220,14 +222,34 @@ export const CompanyDataForm: React.FC<CompanyDataFormProps> = ({ onSubmit }) =>
               )}
             </div>
 
-            {/* Submit Button */}
-            <button
-              type="submit"
-              className="w-full sb-button-primary text-lg py-4"
-            >
-              Comenzar Diagnóstico
-              <ChevronRight className="w-5 h-5" />
-            </button>
+            <div>
+              <label htmlFor="trabajadores" className="block text-sm font-medium text-foreground mb-2">
+                Número de trabajadores *
+              </label>
+              <input
+                type="number"
+                id="trabajadores"
+                min="1"
+                value={formData.numeroTrabajadores || ''}
+                onChange={(e) => handleInputChange('numeroTrabajadores', parseInt(e.target.value) || 0)}
+                className="w-full px-4 py-3 border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-ring bg-background"
+                placeholder="Ej: 25"
+              />
+              {errors.numeroTrabajadores && (
+                <p className="text-destructive text-sm mt-1">{errors.numeroTrabajadores}</p>
+              )}
+            </div>
+
+            {/* Botón de envío (ocupa 2 columnas) */}
+            <div className="md:col-span-2">
+              <button
+                type="submit"
+                className="w-full sb-button-primary text-lg py-4"
+              >
+                Comenzar Diagnóstico
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
           </form>
         </div>
       </div>
